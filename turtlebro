@@ -1,0 +1,29 @@
+import telebot
+import os, random
+
+bot = telebot.TeleBot('8030330683:AAHP83jQaXuOV0hHabyhf_IpWymOehcjtqc')
+
+@bot.message_handler(commands=['turtle'])
+def send_turtle(message):
+    img_name = random.choice(os.listdir('daaa'))
+    with open(f'daaa/{img_name}', 'rb') as f:
+        bot.send_photo(message.chat.id, f)
+        bot.send_message(message.chat.id, 'Исследования на пляжах полуострова Карпаз, одном из основных мест размножения зеленых морских черепах, показали, что черепахи могут оказаться на грани исчезновения из-за загрязнения.')
+
+@bot.message_handler(commands=['fish'])
+def send_turtle(message):
+    img_name = random.choice(os.listdir('fishbroo'))
+    with open(f'fishbroo/{img_name}', 'rb') as f:
+        bot.send_photo(message.chat.id, f)
+        bot.send_message(message.chat.id, 'Ежегодно в море более 640 000 тонн сетей, лески и ловушек попадает в океан при коммерческом рыболовстве')
+
+@bot.message_handler(commands=['fact'])
+def send_fact(message):
+    fact = ['Ежегодно 100 000 животных погибают от запутывания', 'Пластиком, находящимся в океане, можно обогнуть Землю в 400 раз', ' Одноразовый пластик – самая большая проблема']
+    bot.send_message(message.chat.id, random.choice(fact))
+
+@bot.message_handler(commands=['start'])
+def start_command(message):
+    bot.send_message(message.chat.id, 'Привет,/turtle рассказывает о черепахах,/fish расскажет о рыболовстве,/fact расскажет рандомный факт')
+
+bot.polling()
